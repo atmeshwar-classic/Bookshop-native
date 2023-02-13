@@ -23,3 +23,5 @@ export const books: Book[] = [
     price: 20
   },
 ]
+
+export default books;
