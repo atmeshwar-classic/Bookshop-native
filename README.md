@@ -34,3 +34,4 @@ We will use **Redux Toolkit** to manage our state in the app.
 Below are the wireframes for this app. It gives a general idea on how the app should look.
 You could style it however you want! Use your imagination!
 
+![Bookshop](https://user-images.githubusercontent.com/62533739/218420580-7357ade9-1ce5-4a3c-976a-e3349e50c7a0.png)
