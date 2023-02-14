@@ -5,22 +5,19 @@
  * @format
  */
 
-import { createAppContainer } from "react-navigation";
-import { createStackNavigator } from "react-navigation-stack";
-import HomeScreen from "./src/domain/books/HomeScreen";
- 
+import * as React from 'react';
+import { Provider } from 'react-redux';
+import MainContainer from './src/domain/books/MainContainer';
+import store from './src/domain/books/store';
 
-const navigator = createStackNavigator(
-  {
-    Home: HomeScreen 
-  },
-  {
-    initialRouteName: 'Home',
-    defaultNavigationOptions: {
-      title: "JyotiTest",
-    },
-  }
-);
+function App() {
+  return (
+    <Provider  store={store}>
 
-export default createAppContainer(navigator);
+  <MainContainer/>
+    </Provider>
+    
+  );
+}
 
+export default App;

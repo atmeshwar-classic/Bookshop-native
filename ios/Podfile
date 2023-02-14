@@ -46,6 +46,8 @@ target 'bookshopNative' do
   target 'bookshopNativeTests' do
     inherit! :complete
     # Pods for testing
+pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
   end
 
   post_install do |installer|
