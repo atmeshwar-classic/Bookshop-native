@@ -1,18 +1,20 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { delay } from "@reduxjs/toolkit/dist/utils";
+//import { delay } from "@reduxjs/toolkit/dist/utils";
 import type { RootState } from "../../store";
 import { books } from "./books";
 import { Book, BooksState } from "./types";
 
 export const getBooks = createAsyncThunk<Book[]>('books/get', async () => {
   // Since we do not have an api call we are simulating one.
-  await delay(3000);
+  await setTimeout(() => {
+    
+  },3000);
   return books;
 })
 
 const initialState: BooksState = {
   loading: 'not loaded',
-  books: []
+  books: [...books]
 }
 
 const booksSlice = createSlice({
