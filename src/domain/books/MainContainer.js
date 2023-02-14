@@ -29,7 +29,7 @@ function MainContainer() {
             let rn = route.name;
             
             if (rn === bookName) {
-              iconName = focused ? 'hand-left' : 'home-outline';
+              iconName = focused ? 'ios-add' : 'home-outline';
               console.log(iconName)
             } else if (rn === cartName) {
               iconName = focused ? 'list' : 'list-outline';

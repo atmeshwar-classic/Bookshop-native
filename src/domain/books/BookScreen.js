@@ -54,25 +54,29 @@ import {
             key={item.id}
             style={{ flexDirection: "row", alignItems: "center" }}
           >
-            <View  style={{  borderColor: "gray",borderWidth: 1, backgroundColor: 'powderblue', flexDirection:'column',
-      flex:1,marginBottom:'50'}}>
-              <Text style={{ marginLeft:30 , lineHeight: 20,fontWeight: "bold" }}>{item.name}</Text>
-              <Text style={{ marginLeft:30, lineHeight: 20,fontWeight: "bold" }}>{item.author}</Text>
-              <Text style={{ marginLeft:30, lineHeight: 20,fontWeight: "bold" }}>{item.description}</Text>
-              <Text style={{ marginLeft:30, lineHeight: 20,fontWeight: "bold" }}>{item.price}</Text>
+            <View style = {{height:150}} >
+            <View  style={{ marginTop:20, marginLeft:10 ,borderColor: "gray",borderWidth: 1, backgroundColor: 'white',height:120 , width:350}}>
+              <Text style={{ marginTop:5,marginLeft:10 , lineHeight: 20,fontWeight: "bold" }}>{item.name}</Text>
+              <Text style={{ marginLeft:10, lineHeight: 20,fontWeight: "bold" }}>{item.author}</Text>
+              <Text style={{ marginLeft:10, lineHeight: 20,fontWeight: "bold" }}>{item.description}</Text>
+              <Text style={{ marginLeft:10, lineHeight: 20,fontWeight: "bold" }}>{item.price}</Text>
 
               {cart.some((value) => value.id == item.id) ? (
                 <Pressable onPress={() => removeItemFromCart(item)}>
                   <Text
-                    style={{
-                      borderColor: "gray",
-                      borderWidth: 1,
-                      marginHorizontal: 20,
-                      padding: 50,
-                      marginLeft:30,
-                    }}
+                   style={{
+                    borderColor: "gray",
+                    borderWidth: 1,
+                    padding: 5,
+                    backgroundColor:'blue',
+                     color:'white',
+                     fontWeight:'bold',
+                     alignContent: 'flex-end',
+                     textAlign: 'right',
+                     alignSelf:'flex-end'
+                  }}
                   >
-                    REMOVE FROM CART
+                    ADDED
                   </Text>
                 </Pressable>
               ) : (
@@ -81,9 +85,13 @@ import {
                     style={{
                       borderColor: "gray",
                       borderWidth: 1,
-                      marginHorizontal: 100,
                       padding: 5,
-                     
+                      backgroundColor:'blue',
+                       color:'white',
+                       fontWeight:'bold',
+                       alignContent: 'flex-end',
+                       textAlign: 'right',
+                       alignSelf:'flex-end'
                     }}
                   >
                     ADD TO CART
@@ -91,38 +99,18 @@ import {
                 </Pressable>
               )}
             </View>
+            </View>
           </Pressable>
         ))}
   
         {cart.map((item,index) => (
           <View style={{padding:10}} key={index}>
+
             <Text>{item.name}</Text>
-            <Image style={{ width: 100, height: 120, borderRadius: 8,marginTop:6 }}
-                source={{ uri: item.image }}/>
-            <Pressable
-              style={{
-                flexDirection: "row",
-                marginTop:20,
-                alignItems: "center",
-                backgroundColor: "#FF3366",
-                borderRadius: 5,
-                width: 120,
-              }}
-            >
-                <Pressable>
-                <Text
-                  style={{
-                    fontSize: 20,
-                    color: "white",
-                    paddingHorizontal: 10,
-                  }}
-                >
-                  {item.quantity}
-                </Text>
-              </Pressable>
-  
-               
-            </Pressable>
+            <Text>{item.author}</Text>
+            <Text>{item.description}</Text>
+            <Text>{item.price}</Text>
+
           </View>
         ))}
       </SafeAreaView>
