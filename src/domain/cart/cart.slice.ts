@@ -5,7 +5,9 @@ import { CartBook, CartBooksState } from "./types";
 
 const initialState: CartBooksState = {
   loading: 'not loaded',
-  cart_books: []
+  cart_books: [],
+  totalCost: 0,
+  totalBooks: 0
 }
 
 const cartSlice = createSlice({
@@ -20,8 +22,9 @@ const cartSlice = createSlice({
     cartAddSuccess(state, action){
       // console.log(state.cart_books, " Cart Books ")
       state.loading = 'loaded',
-      state.cart_books = [...state.cart_books, action.payload]
-
+      state.cart_books = [...state.cart_books, action.payload],
+      state.totalCost = state.cart_books.reduce((sum, book) => book.price+sum, 0)
+      state.totalBooks = state.totalBooks+1;
     },
     cartAddFailure(state, action){
       state.loading = 'not loaded'
@@ -39,6 +42,8 @@ const cartSlice = createSlice({
           return book;
         }
       })
+      state.totalCost = state.cart_books.reduce((sum, book) => book.price+sum, 0)
+      state.totalBooks = state.totalBooks-1;
     },
     cartRemoveFailure(state, action){
       state.loading = 'not loaded'

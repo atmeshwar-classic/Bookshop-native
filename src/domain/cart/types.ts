@@ -10,4 +10,6 @@ export type CartBook = {
 
 export type CartBooksState = DefaultLoadingState & {
   cart_books: CartBook[];
+  totalCost: number, 
+  totalBooks: number
 }

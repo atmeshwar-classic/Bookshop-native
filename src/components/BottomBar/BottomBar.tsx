@@ -1,8 +1,9 @@
-import * as React from 'react';
-import { StyleSheet, Dimensions, View } from 'react-native';
+import React, {useEffect, useState} from 'react';
+import { StyleSheet, Dimensions, View, Text } from 'react-native';
 import { Appbar, FAB, useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {useSelector} from 'react-redux'
 
 const BOTTOM_APPBAR_HEIGHT = 60;
 const MEDIUM_FAB_HEIGHT = 56;
@@ -13,6 +14,13 @@ const { width, height } = Dimensions.get('screen');
 const BottomBar = ({isBook=false, isCart=false, handleScreen}) => {
     const { bottom } = useSafeAreaInsets();
     const theme = useTheme();
+
+    const cartState = useSelector<any>(state => state.cart);
+    const [totalItems, setTotalItems] = useState<number>(0);
+
+    useEffect(() => {
+        setTotalItems(total => cartState.totalBooks)
+    }, [cartState]);
 
     return (
         <Appbar
@@ -30,6 +38,7 @@ const BottomBar = ({isBook=false, isCart=false, handleScreen}) => {
             </View>
             <View style={styles.bottomIcon} >
                 <Icon name="cart-plus" size={30} style={{ color: isCart? '#2092EC' : '#333' }} onPress={() => handleScreen('Cart')} />
+                <Text style={styles.totalItems}>{totalItems}</Text>
             </View>
 
         </Appbar>
@@ -56,6 +65,16 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    totalItems: {
+        top: -10, position : 'absolute', 
+        marginLeft: 25,
+        backgroundColor: '#ff0000',
+        color: '#fff',
+        width: 20,
+        height: 20,
+        textAlign: 'center',
+        borderRadius: 15
     }
 });
 
