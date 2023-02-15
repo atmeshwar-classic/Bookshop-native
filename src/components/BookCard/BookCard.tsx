@@ -59,7 +59,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   cardLabel: {
-    flex: 1
+    flex: 1,
+    fontWeight: 'bold',
+    color: '#707070'
   },
   cardValue: {
     flex: 1
