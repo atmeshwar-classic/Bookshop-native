@@ -18,7 +18,7 @@ const cartSlice = createSlice({
       state.loading = 'not loaded'
     },
     cartAddSuccess(state, action){
-      console.log(state.cart_books, " Cart Books ")
+      // console.log(state.cart_books, " Cart Books ")
       state.loading = 'loaded',
       state.cart_books = [...state.cart_books, action.payload]
 
@@ -34,7 +34,7 @@ const cartSlice = createSlice({
     },
     cartRemoveSuccess(state, action){
       state.loading = 'loaded',
-      state.cart_books = state.cart_books.filter(function(book){
+      state.cart_books = state.cart_books.filter(function(book) {
         if(book.id != action.payload.id){
           return book;
         }
@@ -57,10 +57,10 @@ export const cartAddAction = (data) => {
   }
 }
 
-export const cartRemoveAction = (data) => {
+export const cartRemoveAction = (id) => {
   return dispatch => {
     dispatch(cartListActions.cartRemoveRequest());
-    dispatch(cartListActions.cartRemoveSuccess(id));
+    dispatch(cartListActions.cartRemoveSuccess({id: id}));
     dispatch(cartListActions.cartRemoveFailure());
   }
 }

@@ -26,7 +26,10 @@ const BooksScreen = (params:BooksListProp) => {
   const handleClick = (id:number, data:any) => {
     console.log(id)
     dispatch(cartAddAction(data));
-    dispatch(booksAddToCardAction(id))
+    if(booksState.loading == 'loaded'){
+      alert('Book add to cart successfully')
+    }
+    
   }
 
   const handleScreen = (route_type:any) => {
@@ -39,6 +42,7 @@ const BooksScreen = (params:BooksListProp) => {
 
   useEffect(() => {
     setBooksList(st => booksState.books)
+    
     // console.log(booksState.books)
   }, [booksState])
 

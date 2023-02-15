@@ -20,14 +20,13 @@ const CartScreen = (params: BooksListProp) => {
 
   const booksState = useSelector(state => state.cart)
 
-  console.log(booksState)
-
   const [booksList, setBooksList] = useState<Book>([]);
 
   const handleClick = (id: number, data: any) => {
-    console.log(id)
-    dispatch(cartAddAction(data));
-    dispatch(booksAddToCardAction(id))
+    dispatch(cartRemoveAction(id));
+    if(booksState.loading == 'loaded'){
+      alert('Book remove from cart successfully')
+    }
   }
 
   const handleScreen = (route_type: any) => {
@@ -35,8 +34,9 @@ const CartScreen = (params: BooksListProp) => {
   }
 
   useEffect(() => {
-    setBooksList(lst => booksState.cart_books)
-  }, [booksList]);
+    setBooksList(lst => booksState.cart_books);
+    // console.log(booksState.cart_books)
+  }, [booksState]);
 
   return <View>
     <ScrollView>
