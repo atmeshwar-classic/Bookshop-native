@@ -5,7 +5,9 @@ const combinedReducer = combineReducers({
   books: booksSliceReducer
 })
 
-export const store = configureStore({ reducer: combinedReducer });
+const store = configureStore({ reducer: combinedReducer, devTools: true });
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+
+export default store;
