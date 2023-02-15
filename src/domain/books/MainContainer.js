@@ -9,8 +9,7 @@ import { Text, StyleSheet,View,Button ,TouchableOpacity} from "react-native";
 
 // Screens
 import BookScreen from "./BookScreen";
- 
-import CartScreen from "./CartScreen";
+import CartScreen from "./CartScreen.tsx";
 
 //Screen names
 const bookName = "Books";
@@ -29,13 +28,11 @@ function MainContainer() {
             let rn = route.name;
             
             if (rn === bookName) {
-              iconName = focused ? 'ios-add' : 'home-outline';
+              iconName = focused ? 'home' : 'home-outline';
               console.log(iconName)
             } else if (rn === cartName) {
               iconName = focused ? 'list' : 'list-outline';
-
             } 
-
             // You can return any component that you like here!
             return <Ionicons name={iconName} size={size} color={color} />;
           },
