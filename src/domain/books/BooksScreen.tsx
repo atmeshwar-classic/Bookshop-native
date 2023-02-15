@@ -28,10 +28,10 @@ const BooksScreen = (params:BooksListProp) => {
     console.log(booksState.books)
   }, [booksState])
 
-    return <ScrollView>
 
-    <View>
-        <View style={{padding: 10}}>
+      return  <View>
+       <ScrollView>
+        <View style={{padding: 10, marginBottom: 70}}>
           {
             booksList && booksList?.map((item,idx) => (
               
@@ -39,9 +39,9 @@ const BooksScreen = (params:BooksListProp) => {
               ))
             }
         </View>
-<BottomBar />
-    </View>
             </ScrollView>
+<BottomBar isBook={true} isCart={false} />
+    </View>
 }
 
 

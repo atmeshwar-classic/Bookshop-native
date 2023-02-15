@@ -10,7 +10,7 @@ const MEDIUM_FAB_HEIGHT = 56;
 const { width, height } = Dimensions.get('screen');
 
 
-const BottomBar = () => {
+const BottomBar = ({isBook=false, isCart=false}) => {
     const { bottom } = useSafeAreaInsets();
     const theme = useTheme();
 
@@ -26,10 +26,10 @@ const BottomBar = () => {
             safeAreaInsets={{ bottom }}
         >
             <View style={styles.bottomIcon} >
-                <Icon name="book" size={30} color="#333" />
+                <Icon name="book" size={30} style={{ color: isBook? '#2092EC' : '#333' }} />
             </View>
             <View style={styles.bottomIcon} >
-                <Icon name="cart-plus" size={30} color="#333" />
+                <Icon name="cart-plus" size={30} style={{ color: isCart? '#2092EC' : '#333' }} />
             </View>
 
         </Appbar>
