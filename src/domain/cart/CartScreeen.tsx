@@ -5,24 +5,19 @@ import { Book } from '../../domain/books/types';
 import BottomBar from '../../components/BottomBar/BottomBar';
 import { BookCard } from '../../components/BookCard/BookCard';
 
-import { getBooks, booksAddToCardAction} from './books.slice';
+import { booksListAction, getBooks} from './cart.slice';
 
 import { useSelector, useDispatch } from 'react-redux'
 
 type BooksListProp = Book;
 
-const BooksScreen = (params:BooksListProp) => {
+const CartScreen = (params:BooksListProp) => {
 
   const dispatch = useDispatch();
   
   const booksState =  useSelector(state => state.books)
 
   const [booksList , setBooksList] = useState<Book>([]);
-
-  const handleClick = (id:number) => {
-    console.log(id)
-    dispatch(booksAddToCardAction(id))
-  }
 
   useEffect(() => {
     dispatch(getBooks())
@@ -40,7 +35,7 @@ const BooksScreen = (params:BooksListProp) => {
           {
             booksList && booksList?.map((item,idx) => (
               
-              <BookCard key={item.id} id={item.id} author={item.author} description={item.description} name={item.name} price={item.price} handleClick={handleClick}/>
+              <BookCard key={item.id} id={item.id} author={item.author} description={item.description} name={item.name} price={item.price} />
               ))
             }
         </View>
@@ -50,4 +45,4 @@ const BooksScreen = (params:BooksListProp) => {
 }
 
 
-export default BooksScreen;
+export default CartScreen;
