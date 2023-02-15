@@ -23,3 +23,8 @@ export const books: Book[] = [
     price: 20
   },
 ]
+
+export const getProducts = () => {
+  return books;
+  
+}
