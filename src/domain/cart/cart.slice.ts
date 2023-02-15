@@ -1,43 +1,71 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { delay } from "@reduxjs/toolkit/dist/utils";
 import type { RootState } from "../../store";
-import { books } from "./books";
-import { Book, BooksState } from "./types";
+import { CartBook, CartBooksState } from "./types";
 
-export const getBooks = createAsyncThunk<Book[]>('books/get', async () => {
-  // Since we do not have an api call we are simulating one.
-  // await delay(3000);
-  // setTimeout()
-  return books;
-})
-
-const initialState: BooksState = {
+const initialState: CartBooksState = {
   loading: 'not loaded',
-  books: []
+  cart_books: []
 }
 
-const booksSlice = createSlice({
-  name: 'books',
+const cartSlice = createSlice({
+  name: 'cart',
   initialState,
   reducers: {
-    clearBooksState: () => initialState
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(getBooks.pending, (state, action) => {
-        state.loading = 'loading';
+    // Add To Cart
+
+    cartAddRequest(state, action){
+      state.loading = 'not loaded'
+    },
+    cartAddSuccess(state, action){
+      console.log(state.cart_books, " Cart Books ")
+      state.loading = 'loaded',
+      state.cart_books = [...state.cart_books, action.payload]
+
+    },
+    cartAddFailure(state, action){
+      state.loading = 'not loaded'
+    },
+
+    // Remove from cart
+
+    cartRemoveRequest(state, action){
+      state.loading = 'not loaded'
+    },
+    cartRemoveSuccess(state, action){
+      state.loading = 'loaded',
+      state.cart_books = state.cart_books.filter(function(book){
+        if(book.id != action.payload.id){
+          return book;
+        }
       })
-      .addCase(getBooks.fulfilled, (state, action) => {
-        state.loading = 'loaded';
-        state.books = action.payload;
-      })
-      .addCase(getBooks.rejected, (state, action) => {
-        state.loading = 'error';
-        state.error = (action.payload as string) ?? action.error.message;
-      })
-  }
+    },
+    cartRemoveFailure(state, action){
+      state.loading = 'not loaded'
+    },
+  }, 
 })
 
-export const booksSliceReducer = booksSlice.reducer;
-export const { clearBooksState } = booksSlice.actions;
-export const booksSelector = (state: RootState) => state.books;
+
+export const cartAddAction = (data) => {
+
+  // console.log(data, "Show Me")
+  return dispatch => {
+    dispatch(cartListActions.cartAddRequest());
+    dispatch(cartListActions.cartAddSuccess(data));
+    dispatch(cartListActions.cartAddFailure());
+  }
+}
+
+export const cartRemoveAction = (data) => {
+  return dispatch => {
+    dispatch(cartListActions.cartRemoveRequest());
+    dispatch(cartListActions.cartRemoveSuccess(id));
+    dispatch(cartListActions.cartRemoveFailure());
+  }
+}
+
+
+export const cartSliceReducer = cartSlice.reducer;
+export const cartListActions = cartSlice.actions;
+export const cartSelector = (state: RootState) => state.cart_books;

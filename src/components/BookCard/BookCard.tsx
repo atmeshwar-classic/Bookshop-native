@@ -5,7 +5,7 @@ import { StyleSheet, View, } from "react-native";
 type BookCardProps = Book;
 
 
-export const BookCard = ({ name, description, author, price, id, handleClick }: BookCardProps) => {
+export const BookCard = ({ name, description, author, price, id, data, btnLabel, handleClick }: BookCardProps) => {
   return <Card
     style={{
       backgroundColor: '#fff',
@@ -37,9 +37,9 @@ export const BookCard = ({ name, description, author, price, id, handleClick }: 
       <Text variant="bodyMedium" style={styles.cardValue}> {description}</Text>
         </View>
         <View style={styles.cardActions}>
-      <Button style={styles.addButton} onPress={() => handleClick(id)}>
+      <Button style={styles.addButton} onPress={() => handleClick(id, data)}>
         <Text style={{color: '#fff', fontWeight: 'bold'}}>
-          + Add To Card
+          {btnLabel}
           </Text>
           </Button>
 

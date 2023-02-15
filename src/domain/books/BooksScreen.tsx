@@ -6,12 +6,16 @@ import BottomBar from '../../components/BottomBar/BottomBar';
 import { BookCard } from '../../components/BookCard/BookCard';
 
 import { getBooks, booksAddToCardAction} from './books.slice';
+import { cartAddAction } from '../cart/cart.slice';
 
 import { useSelector, useDispatch } from 'react-redux'
+import { useNavigation } from '@react-navigation/native';
 
 type BooksListProp = Book;
 
 const BooksScreen = (params:BooksListProp) => {
+
+  const navigation = useNavigation();
 
   const dispatch = useDispatch();
   
@@ -19,9 +23,14 @@ const BooksScreen = (params:BooksListProp) => {
 
   const [booksList , setBooksList] = useState<Book>([]);
 
-  const handleClick = (id:number) => {
+  const handleClick = (id:number, data:any) => {
     console.log(id)
+    dispatch(cartAddAction(data));
     dispatch(booksAddToCardAction(id))
+  }
+
+  const handleScreen = (route_type:any) => {
+    navigation.navigate(route_type)
   }
 
   useEffect(() => {
@@ -30,7 +39,7 @@ const BooksScreen = (params:BooksListProp) => {
 
   useEffect(() => {
     setBooksList(st => booksState.books)
-    console.log(booksState.books)
+    // console.log(booksState.books)
   }, [booksState])
 
 
@@ -40,12 +49,12 @@ const BooksScreen = (params:BooksListProp) => {
           {
             booksList && booksList?.map((item,idx) => (
               
-              <BookCard key={item.id} id={item.id} author={item.author} description={item.description} name={item.name} price={item.price} handleClick={handleClick}/>
+              <BookCard key={item.id} id={item.id} author={item.author} description={item.description} name={item.name} price={item.price} data={item} btnLabel="+ Add to Cart" handleClick={handleClick}/>
               ))
             }
         </View>
             </ScrollView>
-<BottomBar isBook={true} isCart={false} />
+<BottomBar isBook={true} isCart={false} handleScreen={handleScreen} />
     </View>
 }
 
