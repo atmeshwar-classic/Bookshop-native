@@ -2,14 +2,14 @@
 import React from "react";
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import Ionicons from 'react-native-vector-icons/FontAwesome';
 
 import { Text, StyleSheet,View,Button ,TouchableOpacity} from "react-native";
 
 
 // Screens
 import BookScreen from "./BookScreen";
-import CartScreen from "./CartScreen.tsx";
+import CartScreen from "./CartScreen";
 
 //Screen names
 const bookName = "Books";
@@ -26,10 +26,10 @@ function MainContainer() {
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
             let rn = route.name;
-            
+            console.log("routeName:",rn);
             if (rn === bookName) {
-              iconName = focused ? 'home' : 'home-outline';
-              console.log(iconName)
+              iconName = focused ? 'search' : 'search';
+              console.log("iconName:",iconName);
             } else if (rn === cartName) {
               iconName = focused ? 'list' : 'list-outline';
             } 
