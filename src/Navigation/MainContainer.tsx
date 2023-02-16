@@ -1,62 +1,49 @@
 
 import React from "react";
-import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Ionicons from 'react-native-vector-icons/FontAwesome';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { Text, StyleSheet,View,Button ,TouchableOpacity} from "react-native";
-
-
+import { NavigationContainer } from '@react-navigation/native';
 // Screens
 import BookScreen from "../domain/books/BookScreen";
 import CartScreen from "../domain/Cart/CartScreen";
 
-//Screen names
-const bookName = "Books";
-const cartName = "Cart";
 
 const Tab = createBottomTabNavigator();
 
 function MainContainer() {
   return (
-    <NavigationContainer>
-      <Tab.Navigator
-        initialRouteName={bookName}
-        screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color, size }) => {
-            let iconName;
-            let rn = route.name;
-            console.log("routeName:",rn);
-            if (rn === bookName) {
-              iconName = focused ? 'md-home' : 'search';
-              console.log("iconName:",iconName);
-            } else if (rn === cartName) {
-              iconName = focused ? 'list' : 'list-outline';
-            } 
-            // You can return any component that you like here!
-            return <Ionicons name={iconName} size={size} color={color} />;
-          },
-        })}
-        screenOptions={{
-          tabBarActiveTintColor: "tomato",
-          tabBarInactiveTintColor: "grey",
-          tabBarLabelStyle: {
-            paddingBottom: 10,
-            fontSize: 10
-          },
-          "tabBarStyle": [
-            {
-              "display": "flex"
-            },
-            null
-          ]
-        }}>
-
-        <Tab.Screen name={bookName} component={BookScreen} />
-        <Tab.Screen name={cartName} component={CartScreen} />
-
-      </Tab.Navigator>
-    </NavigationContainer>
+<NavigationContainer>
+    <Tab.Navigator
+      initialRouteName="Books"
+      screenOptions={{
+        tabBarActiveTintColor: '#e91e63',
+      }}
+    >
+      <Tab.Screen
+        name="Books"
+        component={BookScreen}
+        options={{
+          tabBarLabel: 'Books',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="book-open" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Cart"
+        component={CartScreen}
+        options={{
+          tabBarLabel: 'Cart',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="cart" color={color} size={size} />
+          ),
+          tabBarBadge: 3,
+        }}
+      />
+       
+    </Tab.Navigator>
+</NavigationContainer>
   );
 }
 export default MainContainer;
