@@ -1,28 +1,23 @@
 import { Book } from "../../domain/books/types";
 import {View,Text,StyleSheet, Button } from "react-native";
-import React, { useState } from 'react';
+import { removeItem } from "../../domain/books/cartSlice";
 import { useDispatch } from 'react-redux';
-import { addItem } from "../../domain/books/cartSlice";
 import { styles } from "./styles";
 
- type BookCardProps = Book;
+type CartCardProps = Book;
 
-export const BookCard = ({...pros}:BookCardProps) => {
-  const [isAdded, setIsAdded] = useState(false);
+export const CartCard = ({...pros}:CartCardProps) => {
 
-  const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
-
-const handleAddToCart = () => {
-    const item = { ...pros };
-    dispatch(addItem(item));
-
-    setIsAdded(true);
-
+  
+   const handleRemoveFromCart = () => {
+    const item = { ...pros};
+    dispatch(removeItem(item.id));
     setTimeout(() => {
-        setIsAdded(false);
     }, 3000);
 };
+
 
   return(
     <View style={styles.item}>
@@ -37,10 +32,11 @@ const handleAddToCart = () => {
     <Text>
       Price:{ pros.price}rs
     </Text>
-    <Button title= {isAdded ? "Added": "Add to cart"}
-     onPress= {handleAddToCart}/>
+    <Button title= {"Remove"}
+    onPress= {handleRemoveFromCart} />
    
+  
   </View>
 
   );
-  }
+};
