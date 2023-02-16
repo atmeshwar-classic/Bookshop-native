@@ -8,7 +8,7 @@ import { Book, BooksState } from "./types";
 export const getBooks = createAsyncThunk<Book[]>('books/get', async () => {
   // Since we do not have an api call we are simulating one.
   //await delay(3000);
-  return books;
+return books;
 })
 
 const initialState: BooksState = {

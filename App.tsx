@@ -5,10 +5,18 @@ import  {BooksScreen} from './src/domain/books/BooksScreen';
 import {CartScreen}  from './src/domain/books/CartScreen';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Image } from 'react-native';
-
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {useDispatch, useSelector} from 'react-redux';
+import { AppDispatch, RootState } from './src/store';
 const Tab = createBottomTabNavigator();
 
 export default function App() {
+
+  const dispatch = useDispatch<AppDispatch>();
+  const {isCartOpen, cartItems} = useSelector((state:any)=> state.cart);
+  
+  const cartQuantity = cartItems.length;
+  
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -18,16 +26,16 @@ export default function App() {
 
           if (route.name === 'Books') {
             iconName = focused ? 
-            <Image source={require('../Bookshop-native/assets/shopping.png')}/>
-            : <Image source={require('../Bookshop-native/assets/shopping.png')} />;
+            'book-open'
+            : 'book-open'
           }
          else if (route.name === 'Cart') {
             iconName = focused
-              ? <Image source={require('../Bookshop-native/assets/open-book.png')}/>
-              : <Image source={require('../Bookshop-native/assets/open-book.png')} />;
+              ? 'cart-outline'
+              : 'cart-outline'
           } 
           // You can return any component that you like here!
-          return <Ionicons name={iconName} size={size} color={color} />;
+          return <MaterialCommunityIcons name={iconName} size={size} color={color} />;
         },
         tabBarActiveTintColor: 'tomato',
         tabBarInactiveTintColor: 'gray',
@@ -35,7 +43,7 @@ export default function App() {
     
       >
         <Tab.Screen name="Books" component={BooksScreen} />
-        <Tab.Screen name="Cart" component={CartScreen}  options={{ tabBarBadge: 3 }}/>
+        <Tab.Screen name="Cart" component={CartScreen}  options={{ tabBarBadge: cartQuantity }}/>
       </Tab.Navigator>
     </NavigationContainer>
   );
