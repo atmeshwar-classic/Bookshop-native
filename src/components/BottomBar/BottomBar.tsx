@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import { StyleSheet, Dimensions, View, Text } from 'react-native';
+import { Dimensions, View, Text } from 'react-native';
 import { Appbar, FAB, useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {useSelector} from 'react-redux'
+import {useSelector} from 'react-redux';
+import styles from './BottomBar.style';
 
 const BOTTOM_APPBAR_HEIGHT = 60;
 const MEDIUM_FAB_HEIGHT = 56;
@@ -44,38 +45,5 @@ const BottomBar = ({isBook=false, isCart=false, handleScreen}) => {
         </Appbar>
     );
 };
-
-const styles = StyleSheet.create({
-    bottom: {
-        backgroundColor: 'aquamarine',
-        position: 'absolute',
-        left: 0,
-        right: 0,
-        bottom: 0,
-        top: height - 210,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    fab: {
-        position: 'absolute',
-        right: 16,
-    },
-    bottomIcon: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    totalItems: {
-        top: -10, position : 'absolute', 
-        marginLeft: 25,
-        backgroundColor: '#ff0000',
-        color: '#fff',
-        width: 20,
-        height: 20,
-        textAlign: 'center',
-        borderRadius: 15
-    }
-});
 
 export default BottomBar;
