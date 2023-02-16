@@ -8,8 +8,8 @@ import { Text, StyleSheet,View,Button ,TouchableOpacity} from "react-native";
 
 
 // Screens
-import BookScreen from "./BookScreen";
-import CartScreen from "./CartScreen";
+import BookScreen from "../domain/books/BookScreen";
+import CartScreen from "../domain/Cart/CartScreen";
 
 //Screen names
 const bookName = "Books";
@@ -28,7 +28,7 @@ function MainContainer() {
             let rn = route.name;
             console.log("routeName:",rn);
             if (rn === bookName) {
-              iconName = focused ? 'search' : 'search';
+              iconName = focused ? 'md-home' : 'search';
               console.log("iconName:",iconName);
             } else if (rn === cartName) {
               iconName = focused ? 'list' : 'list-outline';

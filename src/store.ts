@@ -1,6 +1,15 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { booksSliceReducer } from "./domain/books/books.slice";
 
+import CartReducer from "./domain/Cart/CartSlice";
+
+export default configureStore ({
+    reducer:{
+        cart:CartReducer,books: booksSliceReducer
+    }
+})
+
+
 const combinedReducer = combineReducers({
   books: booksSliceReducer
 })

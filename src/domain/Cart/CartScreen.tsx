@@ -8,8 +8,8 @@ import {
   } from "react-native";
   import React, { useState } from "react";
   import { useDispatch, useSelector } from "react-redux";
-  import { removeFromCart } from "../redux/reducer/CartReducers";
-
+import { removeFromCart } from "./CartSlice";
+ 
 export default function CartScreen({ navigation }) {
     const cart = useSelector((state) => state.cart.cart);
     console.log(cart);
@@ -67,16 +67,6 @@ export default function CartScreen({ navigation }) {
         <View style = {{marginBottom:10,height: 50,borderColor:'black',borderWidth:2,width:350,marginLeft:10,alignItems:"flex-end",backgroundColor:"blue"}}>
                 <Text style = {{marginTop: 10,fontSize:20,fontWeight:"bold", marginEnd: 10,color:"white"}}> Total: ${totalPrice}</Text>
                 </View>
-        {cart.map((item,index) => (
-          <View style={{padding:10}} key={index}>
-
-            {/* <Text style = {{borderColor: "gray",borderWidth: 1}}>{item.name}</Text>
-            <Text>{item.author}</Text>
-            <Text>{item.description}</Text>
-            <Text>{item.price}</Text> */}
-
-          </View>
-        ))}
       </SafeAreaView>
     );
 }

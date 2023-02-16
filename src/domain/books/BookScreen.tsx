@@ -8,45 +8,30 @@ import {
     SafeAreaView,
   } from "react-native";
   import React from "react";
-  import { useDispatch, useSelector } from "react-redux";
-  import { addToCart, removeFromCart } from "../redux/reducer/CartReducers";
+  import { useDispatch } from "react-redux";
+import { getBooks } from "./books.slice";
+import { books } from "./books";
+import { useEffect } from "react";
+import { useSelector } from 'react-redux';
+import { AppDispatch, RootState } from "../../store";
+import { Book } from './types';
+import { addToCart, removeFromCart } from "../Cart/CartSlice";
   
-  const BookScreen = () => {
-    const cart = useSelector((state) => state.cart.cart);
-    console.log(cart);
-    const dispatch = useDispatch();
-    let img =<Image source={require('../../assets/plus.png')} />
+ const BookScreen = ({navigation}: any) => {
+    
+     const cart = useSelector((state) => state.cart.cart);
+    //console.log(cart);
+
+    const dispatch = useDispatch<AppDispatch>();
+    const bookList = useSelector( (state: RootState) => state.books);
+    console.log("Books list", bookList);
    
-    const bookArr = [
-      {
-        id: "0",
-          name: 'MALGUDI DAYS',
-          author: 'Author : R.K. Narayan',
-          description: 'The book includes 32 stories, all set in the fictional town of Malgudi, located in South India...',
-          price: "2.99$",
-      },
-      {
-        id: "1",
-          name: 'THE ROOM ON THE ROOF',
-          author: 'Author : RUSKIN BOND',
-          description: 'The Room on the Roof is the story of an orphaned Anglo-Indian boy...',
-          price: "3.99$",
-      },
-      {
-        id: "2",
-          name: 'THE COMPLETE ADVENTURES OF FELUDA',
-          author: 'Author : SATYAJIT RAY',
-          description: 'Between 1965 and 1992, Satyajit Ray wrote a total of 35 Feluda stories...',
-          price: "4.99$",
-      },
-      {
-        id: "3",
-          name: 'COMBAT OF SHADOWS',
-          author: 'Author : MANOHAR MALGONKAR',
-          description: 'Manohar Malgonkar’s Combat of Shadows is the tale of an Anglo-Indian woman, Ruby Miranda...',
-          price: "5.99$",
-      }
-    ];
+    useEffect(() => { 
+      dispatch(getBooks())
+  
+    }, []);    
+   
+   
     const addItemToCart = (item) => {
       dispatch(addToCart(item));
     };
@@ -56,8 +41,9 @@ import {
     
     return (
       <SafeAreaView>
+           
          
-        {bookArr.map((item) => (
+        {bookList.books.map((item) => (
           <Pressable
             key={item.id}
             style={{ flexDirection: "row", alignItems: "center" }}
@@ -111,16 +97,7 @@ import {
           </Pressable>
         ))}
   
-        {cart.map((item,index) => (
-          <View style={{padding:10}} key={index}>
-
-            {/* <Text style = {{borderColor: "gray",borderWidth: 1}}>{item.name}</Text>
-            <Text>{item.author}</Text>
-            <Text>{item.description}</Text>
-            <Text>{item.price}</Text> */}
-
-          </View>
-        ))}
+         
       </SafeAreaView>
     );
   };
