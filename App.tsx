@@ -1,6 +1,8 @@
 import React from 'react';
 import type {PropsWithChildren} from 'react';
 import {ScrollView, StyleSheet, Text, useColorScheme, View} from 'react-native';
+import {store} from './src/store/store';
+import {Provider} from 'react-redux';
 
 import AppNavigation from './src/navigation/appNavigation';
 
@@ -12,11 +14,11 @@ function App(): JSX.Element {
   // const isDarkMode = useColorScheme() === 'dark';
 
   return (
-    // <SafeAreaView style={backgroundStyle}>
     <>
-      <AppNavigation />
+      <Provider store={store}>
+        <AppNavigation />
+      </Provider>
     </>
-    // </SafeAreaView>
   );
 }
 
