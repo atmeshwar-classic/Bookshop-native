@@ -21,7 +21,10 @@ const booksSlice = createSlice({
   name: 'books',
   initialState,
   reducers: {
-    clearBooksState: () => initialState
+    clearBooksState: () => initialState,
+    addBooksToReduxStore(state,action){
+         state.push(action.payload);
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -40,5 +43,6 @@ const booksSlice = createSlice({
 })
 
 export const booksSliceReducer = booksSlice.reducer;
-export const { clearBooksState } = booksSlice.actions;
+export const { clearBooksState,addBooksToReduxStore } = booksSlice.actions;
 export const booksSelector = (state: RootState) => state.books;
+export default booksSlice.reducer;
