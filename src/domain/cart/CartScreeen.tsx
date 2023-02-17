@@ -9,6 +9,9 @@ import { cartRemoveAction } from '../cart/cart.slice';
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigation } from '@react-navigation/native';
 import styles from './CardScreen.style';
+import store from '../../store';
+import { cartSelector } from '../cart/cart.slice';
+
 
 type CartListProp = Book;
 
@@ -17,14 +20,13 @@ const CartScreen = (params: CartListProp) => {
   const navigation = useNavigation();
 
   const dispatch = useDispatch();
-
-  const cartState = useSelector(state => state.cart)
-
-  const [totalPrice, setTotalPrice] = useState<number>(0);
+   const cartList = cartSelector(store.getState());
+  //  const cartState = useSelector(state => state.cart)
+   const [totalPrice, setTotalPrice] = useState<number>(0);
 
   const handleClick = (id: number, data: any) => {
     dispatch(cartRemoveAction(id));
-    if (cartState.loading == 'loaded') {
+    if (cartState?.loading == 'loaded') {
       alert('Book remove from cart successfully')
     }
   }
@@ -34,16 +36,14 @@ const CartScreen = (params: CartListProp) => {
   }
 
   useEffect(() => {
-    setTotalPrice(total => cartState.totalCost)
-
-    // console.log(cartState.cart_books)
-  }, [cartState]);
+    setTotalPrice(total => cartList?.totalCost)
+  }, [cartList?.cart_books]);
 
   return <View>
     <ScrollView>
       <View style={styles.cartContainer}>
         {
-          cartState.cart_books && cartState.cart_books?.map((item:any, idx:number) => (
+          cartList?.cart_books?.map((item:any, idx:number) => (
             <BookCard key={item.id} id={item.id} author={item.author} description={item.description} name={item.name} price={item.price} data={item} btnLabel="- Remove from Cart" handleClick={handleClick} />
           ))
         }
@@ -55,7 +55,7 @@ const CartScreen = (params: CartListProp) => {
             <View style={styles.totalContainer}>
               <Text style={styles.totalLabel}>Total</Text>
               <Text style={styles.totalLabel}>
-                $ {cartState.totalCost ?? 0}
+                $ {cartList?.totalCost ?? 0}
               </Text>
             </View>
           ) : null

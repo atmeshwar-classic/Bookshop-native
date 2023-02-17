@@ -10,12 +10,18 @@ import { cartAddAction } from '../cart/cart.slice';
 
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigation } from '@react-navigation/native';
+import { RootState } from '../../store';
+import store from '../../store';
+import { booksSelector, clearBooksState,booksSliceReducer } from './books.slice';
+
 
 import styles from './BookScreen.style';
 
 type BooksListProp = Book;
 
 const BooksScreen = (params: BooksListProp) => {
+
+  const booksList = booksSelector(store.getState());
 
   const navigation = useNavigation();
 
@@ -25,6 +31,7 @@ const BooksScreen = (params: BooksListProp) => {
 
   const handleClick = (id: number, data: any) => {
     console.log(id)
+    
     dispatch(cartAddAction(data));
     if (booksState.loading == 'loaded') {
       alert('Book add to cart successfully')
@@ -43,7 +50,7 @@ const BooksScreen = (params: BooksListProp) => {
     <ScrollView>
       <View style={styles.bookContainer}>
         {
-          booksState?.books && booksState?.books?.map((item:any, idx:number) => (
+          booksList?.books?.map((item:any, idx:number) => (
             <BookCard key={item.id} id={item.id} author={item.author} description={item.description} name={item.name} price={item.price} data={item} btnLabel="+ Add to Cart" handleClick={handleClick} />
           ))
         }

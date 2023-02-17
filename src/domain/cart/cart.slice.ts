@@ -73,4 +73,4 @@ export const cartRemoveAction = (id) => {
 
 export const cartSliceReducer = cartSlice.reducer;
 export const cartListActions = cartSlice.actions;
-export const cartSelector = (state: RootState) => state.cart_books;
+export const cartSelector = (state: RootState) => state.cart;
