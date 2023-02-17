@@ -1,41 +1,36 @@
 import { Book } from "../../domain/books/types";
-import {View,Text,StyleSheet, Button } from "react-native";
+import {View,Text, Button } from "react-native";
 import { removeItem } from "../../domain/books/cartSlice";
 import { useDispatch } from 'react-redux';
-import { styles } from "./styles";
+import { stylesCartScreen } from "./styles";
 
 type CartCardProps = Book;
 
-export const CartCard = ({...pros}:CartCardProps) => {
+export const CartCard = ({id,name,author,description,price}:CartCardProps) => {
 
     const dispatch = useDispatch();
-
-  
    const handleRemoveFromCart = () => {
-    const item = { ...pros};
+    const item = {id, name,author,description,price};
     dispatch(removeItem(item.id));
-    setTimeout(() => {
-    }, 3000);
 };
 
 
   return(
-    <View style={styles.item}>
-    <Text style={styles.name}>
-      Books:{ pros.name}</Text>
+    <View style={stylesCartScreen.item}>
+    <Text style={stylesCartScreen.name}>
+      Books:{name}</Text>
     <Text>
-      Author:{ pros.author}
+      Author:{author}
     </Text>
     <Text>
-      Description:{ pros.description}
+      Description:{description}
     </Text>
     <Text>
-      Price:{ pros.price}rs
+      Price:{price}rs
     </Text>
     <Button title= {"Remove"}
     onPress= {handleRemoveFromCart} />
    
-  
   </View>
 
   );

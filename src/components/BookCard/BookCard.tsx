@@ -1,5 +1,5 @@
 import { Book } from "../../domain/books/types";
-import {View,Text,StyleSheet, Button } from "react-native";
+import {View,Text, Button } from "react-native";
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addItem } from "../../domain/books/cartSlice";
@@ -7,14 +7,14 @@ import { styles } from "./styles";
 
  type BookCardProps = Book;
 
-export const BookCard = ({...pros}:BookCardProps) => {
+export const BookCard = ({id,name,author,description,price}:BookCardProps) => {
   const [isAdded, setIsAdded] = useState(false);
 
   const dispatch = useDispatch();
 
 
 const handleAddToCart = () => {
-    const item = { ...pros };
+    const item = {id,name,author,description,price};
     dispatch(addItem(item));
 
     setIsAdded(true);
@@ -27,15 +27,15 @@ const handleAddToCart = () => {
   return(
     <View style={styles.item}>
     <Text style={styles.name}>
-      Books:{ pros.name}</Text>
+      Books:{name}</Text>
     <Text>
-      Author:{ pros.author}
+      Author:{author}
     </Text>
     <Text>
-      Description:{ pros.description}
+      Description:{description}
     </Text>
     <Text>
-      Price:{ pros.price}rs
+      Price:{price}rs
     </Text>
     <Button title= {isAdded ? "Added": "Add to cart"}
      onPress= {handleAddToCart}/>

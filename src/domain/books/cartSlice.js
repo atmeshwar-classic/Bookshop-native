@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-
+import { RootState } from '../../store';
 
 const initialState = {
     isCartOpen: false,
@@ -12,7 +12,6 @@ const cartSlice = createSlice({
     initialState,
     reducers: {
 
-
         toggleCart(state, action) {
             state.isCartOpen = action.payload;
         },
@@ -24,12 +23,13 @@ const cartSlice = createSlice({
 
             if (existingItem) {
                 
-                existingItem.quantity++;
+                existingItem.quantity++
+                console.log("cartClick",existingItem);
+
             } else {
                 state.cartItems.push(action.payload);
+                console.log("cartClick",existingItem)
             }
-
-            console.log("cartClick",existingItem)
         },
 
 
@@ -61,5 +61,6 @@ const cartSlice = createSlice({
 });
 
 
-export const { toggleCart, addItem, removeItem, incrementItem, decrementItem } = cartSlice.actions;
+export const { toggleCart, addItem, removeItem, incrementItem, decrementItem,totalCartLength } = cartSlice.actions;
 export default cartSlice.reducer;
+ export const cartSelector = (state) => state.cart;

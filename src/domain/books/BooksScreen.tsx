@@ -4,28 +4,25 @@ import { useDispatch } from "react-redux";
 import { getBooks } from "./books.slice";
 import { useEffect  } from "react";
 import { useSelector } from 'react-redux';
-import { AppDispatch, RootState } from "../../store";
+import { booksSelector } from './books.slice';
+import { AppDispatch, } from "../../store";
 import { BookCard } from '../../components/BookCard/BookCard';    
 
 export const BooksScreen = ({navigation}: any) => {
+
   const dispatch = useDispatch<AppDispatch>();
   
-  const books = useSelector( (state: RootState) => state.books);
-  console.log("Books list", books);
- 
+  const bookSelector = useSelector(booksSelector)
+
+
   useEffect(() => { 
-    setTimeout(() => {
-      dispatch(
-        getBooks()
-        ) 
-       }, 2000);
-   
+      dispatch(getBooks()) 
   }, []);
 
   return (
     <View>
     <FlatList 
-     data={books.books}
+     data={bookSelector.books}
      keyExtractor={(item) => item.id}
      renderItem={({ item }) => {
        return <BookCard {...item}/>;
