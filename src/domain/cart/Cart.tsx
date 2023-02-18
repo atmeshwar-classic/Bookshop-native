@@ -1,11 +1,12 @@
 import React from 'react';
-import {SafeAreaView, FlatList, StyleSheet} from 'react-native';
+import {SafeAreaView, FlatList} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {cartSelector, removeFromCart} from './cart.slice';
 import {Book} from '../books/types';
 import {BookCard} from '../../components/BookCard/BookCard';
 import {AppDispatch} from '../../store';
 import {Loading} from '../../components/Loading/Loading';
+import {cartStyles as styles} from './cart.styles';
 
 export const Cart = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -34,12 +35,3 @@ export const Cart = () => {
     </SafeAreaView>
   );
 };
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
-  },
-  flatListStyle: {
-    padding: 12,
-  },
-});

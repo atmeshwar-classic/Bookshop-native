@@ -1,6 +1,6 @@
 // The Books Screen
 import React from 'react';
-import {FlatList, StyleSheet, SafeAreaView, Alert} from 'react-native';
+import {FlatList, SafeAreaView, Alert} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {booksSelector, getBooks} from './books.slice';
 import {useEffect} from 'react';
@@ -9,6 +9,7 @@ import {Book} from './types';
 import {addBookToCart, cartSelector} from '../cart/cart.slice';
 import {BookCard} from '../../components/BookCard/BookCard';
 import {Loading} from '../../components/Loading/Loading';
+import {booksScreenStyles as styles} from './books.styles';
 
 export const BooksScreen = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -17,8 +18,7 @@ export const BooksScreen = () => {
 
   useEffect(() => {
     dispatch(getBooks());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dispatch]);
 
   const onAddBookToCart = (item: Book) => {
     let isAdded = false;
@@ -54,13 +54,3 @@ export const BooksScreen = () => {
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
-  },
-  flatListStyle: {
-    padding: 12,
-  },
-});

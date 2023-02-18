@@ -1,8 +1,8 @@
 import {createSlice} from '@reduxjs/toolkit';
 import type {RootState} from '../../store';
+import {cartState} from './types';
 
-const initialState: any = {
-  loading: 'not loaded',
+const initialState: cartState = {
   cart: [],
 };
 
