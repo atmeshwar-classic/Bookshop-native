@@ -1,4 +1,4 @@
-import { DefaultLoadingState } from "../../types/types";
+import {DefaultLoadingState} from '../../types/types';
 
 export type Book = {
   id: string;
@@ -6,8 +6,8 @@ export type Book = {
   author: string;
   description: string;
   price: number;
-}
+};
 
 export type BooksState = DefaultLoadingState & {
   books: Book[];
-}
+};
