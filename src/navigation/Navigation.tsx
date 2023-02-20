@@ -1,12 +1,11 @@
-/* eslint-disable react/no-unstable-nested-components */
-import * as React from 'react';
+import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {BooksScreen} from './domain/books/BooksScreen';
-import {Cart} from './domain/cart/Cart';
-import {cartSelector} from './domain/cart/cart.slice';
+import {BooksScreen} from '../domain/books/BooksScreen';
+import {CartScreen} from '../domain/cart/CartScreen';
+import {cartSelector} from '../domain/cart/cart.slice';
 
 const Tab = createBottomTabNavigator();
 
@@ -31,7 +30,7 @@ export default function Navigation() {
         <Tab.Screen name="Books" component={BooksScreen} />
         <Tab.Screen
           name="Cart"
-          component={Cart}
+          component={CartScreen}
           options={{tabBarBadge: cart.length}}
         />
       </Tab.Navigator>

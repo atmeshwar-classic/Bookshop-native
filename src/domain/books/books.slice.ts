@@ -2,14 +2,7 @@ import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import type {RootState} from '../../store';
 import {books} from './books';
 import {Book, BooksState} from './types';
-
-export const delay = (time: number): Promise<true> => {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve(true);
-    }, time);
-  });
-};
+import { delay } from '../../utils/delay';
 
 export const getBooks = createAsyncThunk<Book[]>('books/get', async () => {
   // Since we do not have an api call we are simulating one.

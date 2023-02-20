@@ -8,13 +8,12 @@ import {AppDispatch} from '../../store';
 import {Loading} from '../../components/Loading/Loading';
 import {cartStyles as styles} from './cart.styles';
 
-export const Cart = () => {
+export const CartScreen = () => {
   const dispatch = useDispatch<AppDispatch>();
   const {cart} = useSelector(cartSelector);
 
   const onDeleteBook = (item: Book) => {
-    let filteredCart = cart.filter((i: Book) => i.id !== item.id);
-    dispatch(removeFromCart(filteredCart));
+    dispatch(removeFromCart(item));
   };
 
   return (
