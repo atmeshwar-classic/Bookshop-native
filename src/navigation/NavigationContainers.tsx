@@ -13,12 +13,10 @@ const Tab = createBottomTabNavigator();
 export default function NavigationContainers() {
 
   const dispatch = useDispatch<AppDispatch>();
-  //const {cartItems} = useSelector((state:any)=> state.cart);
   
-  const {cartItems} = useSelector(cartSelector);
+  const cartItemsSelector = useSelector(cartSelector);
  
-  const cartQuantity = cartItems.length;
-  console.log("cartQuantity"+cartQuantity)
+  const cartQuantity = cartItemsSelector.cartItems.length;
   
   return (
     <NavigationContainer >

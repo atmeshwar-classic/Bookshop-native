@@ -8,34 +8,30 @@ import { cartSelector } from './cartSlice';
 export const CartScreen = ({navigation}: any) => {
 
   const dispatch = useDispatch<AppDispatch>();
- 
-  const {cartItems } = useSelector((state:any) => state.cart);
+  
+  const cartItemsSelector =useSelector(cartSelector)
 
- // const cartItems =useSelector(cartSelector)
+  console.log('cartItemData', cartItemsSelector);
 
-  console.log('cartItemData', cartItems);
-
-  // const cartTotal = cartItems
-  //   .map((item:any) => item.price)
-  //   .reduce((prevValue:any, currValue:any) => prevValue + currValue, 0);
-
-      let total = 0;
-      const { items } = cartItems;
-      for (let i = 0; i < cartItems.length; i++) {
-        total = total + cartItems[i].price
-      }
+    let totalAmount = 0; 
+    cartItemsSelector.cartItems.forEach((item:any) => {
+    for (let property  in item) {
+        if(property === "price")
+        totalAmount += item[property];
+    }
+})
 
   return (
     <View style={stylesCartScreen.container} >
        <FlatList 
-        data={cartItems}
-        keyExtractor={item => item.id}
+        data={cartItemsSelector.cartItems}
+        keyExtractor={(item:any) => item.id}
         renderItem={({item}) => {
           return <CartCard {...item} />;
         }}
       />
 
-    <Text  style={stylesCartScreen.bottom} > Total amount :{total}rs </Text>
+    <Text  style={stylesCartScreen.bottom} > Total amount :{totalAmount}rs </Text>
 
 </View>
  

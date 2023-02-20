@@ -9,9 +9,11 @@ type CartCardProps = Book;
 export const CartCard = ({id,name,author,description,price}:CartCardProps) => {
 
     const dispatch = useDispatch();
+
    const handleRemoveFromCart = () => {
     const item = {id, name,author,description,price};
     dispatch(removeItem(item.id));
+
 };
 
 
